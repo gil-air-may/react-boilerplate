@@ -10,47 +10,59 @@ const mapStateToProps = state => {
 };
 
 class Login extends React.Component {
+  state = { 
+    email: "",
+    password: "",
+  }
+  
   handleFormSubmit = async (event) => {
-    // event.preventDefault();
-    // console.log(this.props)
-    // this.props.signinUser()
-    //   .then((response) => {
-    //     console.log(this.props)
-    //     if (this.state.isAuthenticated){
-    //       this.props.history.push("/private");
-    //     }
-    //   }, (error) => {
-    //     alert(error.message)
-    //   });
     
     try {
-      console.log(this.props)
-      await this.props.signinUser();
-      console.log(this.props)
+      await this.props.signinUser(this.state.email, this.state.password);
+      console.log('await has ended')
       if (this.props.isAuthenticated) 
       { this.props.history.push("/private")}
     
     } catch (error) {
       alert(error.message)
     }
-
-
   }
-
 
   render() {
 
-    console.log(this.props)
     return (
-
+      <form>
+        <div className="field">
+          <label className="label">Email</label>
+          <div className="control">
+            <input
+            className="input"
+            type="email"
+            placeholder="Your email address"
+            value={this.state.email}
+            autoFocus={true}
+            onChange={(e) => this.setState({...this.state, email: e.target.value})}
+            />
+          </div>
+      </div>
+      <div className="field">
+        <label className="label">Password</label>
+        <div className="control">
+          <input
+          className="input"
+          type="password"
+          placeholder="Your password"
+          value={this.state.password}
+          onChange={(e) => this.setState({...this.state, password: e.target.value})}
+          />
+        </div>
+      </div>
       <button
-        className="button is-primary"
-        onClick={this.handleFormSubmit}
-        >Sign in</button>
+      className="button is-primary"
+      onClick={this.handleFormSubmit}
+      >Sign in</button>
+      </form>
       );
     }
 }
-export default connect(
-    mapStateToProps,
-    actions
-)(Login);
+export default connect(mapStateToProps,actions)(Login);
