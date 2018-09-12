@@ -17,15 +17,16 @@ class Login extends React.Component {
   
   handleFormSubmit = async (event) => {
     
-    try {
-      await this.props.signinUser(this.state.email, this.state.password);
-      console.log('await has ended')
+    // try {
+    //   await
+      this.props.signinUser(this.state.email, this.state.password);
+      console.log('execution is here')
       if (this.props.isAuthenticated) 
-      { this.props.history.push("/private")}
+      {this.props.history.push("/private")}
     
-    } catch (error) {
-      alert(error.message)
-    }
+    // } catch (error) {
+    //   alert(error.message)
+    // }
   }
 
   render() {

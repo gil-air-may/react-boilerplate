@@ -1,23 +1,21 @@
 import axios from 'axios'
 
-export const signinUser = (email, password) => dispatch => {
-  
+export function signinUser (email, password) {
 
   console.log({ email, password })
-    axios.post(`/sessions/signin`, { email: email, password: password })
-      .then(function (response) {
-        console.log('Inside then')
-        console.log(response)
-        // dispatch({ type: 'AUTH_USER'});
-        // console.log(response.data)
-        // localStorage.setItem('token', response.data.token);
+    return function (dispatch) {
+      axios.post(`https://jsonplaceholder.typicode.com/posts`, { title: email, body: password, userId: '1' })
+      .then(res => {
+        //console.log('INSIDE THEN')
+        //console.log(res)
+        dispatch({type: 'AUTH_USER'})
       })
-      .catch(function(error) {
-        console.log('Inside Error')
-        console.log(error)
-        //alert(error.message);
-      })
-  return  
+      .catch(err => {
+        console.log(err)
+        dispatch({type: 'Bad login info'});
+      });
+      
   // return function(dispatch) {
-  // }
+  // 
+  }
 }
