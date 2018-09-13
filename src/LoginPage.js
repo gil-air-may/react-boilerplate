@@ -20,7 +20,7 @@ class Login extends React.Component {
 
     e.preventDefault();
     
-    this.props.signinUser();
+    this.props.signinUser(this.state.email, this.state.password);
       
     console.log(this.props.isAuthenticated)
     if (this.props.isAuthenticated) {

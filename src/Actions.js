@@ -1,13 +1,12 @@
 import axios from 'axios'
 
-export function signinUser() {
+export function signinUser(email, password) {
 
   return function (dispatch) {
-    axios.defaults.baseURL = 'http://jsonplaceholder.typicode.com';
-    axios.post('/posts', {
-      title: 'yoo',
-      body: 'oyoo',
-      userId: '1'
+    axios.defaults.baseURL = 'http://192.168.15.5:4000/';
+    axios.post('/sessions/signin', {
+      email: email,
+      password: password,
     })
     .then(function (response) {
       console.log(response);
